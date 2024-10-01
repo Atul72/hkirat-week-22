@@ -4,7 +4,10 @@ import os from "os";
 
 const numCPUs = os.cpus().length;
 
+const PORT = 3000;
+
 if (cluster.isPrimary) {
+  console.log(`Number of CPUs is ${numCPUs}`);
   console.log(`Primary ${process.pid} is running`);
 
   // Fork workers.
@@ -35,7 +38,7 @@ if (cluster.isPrimary) {
     res.send(`Final count is ${count} and the worker is ${process.pid}`);
   });
 
-  app.listen(3000, () => {
+  app.listen(PORT, () => {
     console.log(`Worker ${process.pid} started`);
   });
 }
